@@ -67,7 +67,7 @@ features = ['massBalance', 'massBalance_lag1']
 X_dev = development_df[features].dropna()
 y_dev = development_df['energyProduction'].loc[X_dev.index]
 
-# --- Initialize Linear Regression Model ---
+# Initialize Linear Regression Model
 lr_model = LinearRegression() 
 
 # Configure TimeSeriesSplit to test on one year at a time
@@ -150,7 +150,7 @@ try:
     futureDf = pd.read_excel("C:/Users/samam/OneDrive/MSC Diss/hacking/MSCCode/massBalanceForecast.xlsx")
     
     # Proactively handle NaNs that may exist in the source Excel file 
-    # 1. Fill any NaNs in the source column. ffill() + bfill() handles NaNs anywhere.
+    # Fill any NaNs in the source column. ffill() + bfill() handles NaNs anywhere.
     futureDf['massBalance'].ffill(inplace=True)
     futureDf['massBalance'].bfill(inplace=True)
 
