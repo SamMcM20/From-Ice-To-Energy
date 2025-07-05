@@ -130,7 +130,7 @@ plt.show()
 STEP 4: FINAL EVALUATION ON THE UNSEEN HOLD-OUT SET
 """
 
-print("\n--- STEP 4: Final Evaluation on Hold-Out Set ---")
+print("STEP 4: Final Evaluation on Hold-Out Set")
 # Prepare the hold-out set
 X_hold_out = hold_out_df[features].dropna()
 y_hold_out = hold_out_df['energyProduction'].loc[X_hold_out.index]
