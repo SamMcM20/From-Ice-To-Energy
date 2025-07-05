@@ -25,7 +25,7 @@ MIN_TRAIN_YEARS = 5
 STEP 1: LOAD DATA AND CREATE DEVELOPMENT / HOLD-OUT SETS
 """
 
-print("--- STEP 1: Loading and Splitting Data for Small Dataset ---")
+print("STEP 1: Loading and Splitting Data for Small Dataset")
 
 # Load Historical Data
 try:
