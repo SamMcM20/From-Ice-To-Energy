@@ -149,15 +149,15 @@ print("STEP 5: Forecasting")
 try:
     futureDf = pd.read_excel("C:/Users/samam/OneDrive/MSC Diss/hacking/MSCCode/massBalanceForecast.xlsx")
     
-    # --- FIX: Proactively handle NaNs that may exist in the source Excel file ---
+    # Proactively handle NaNs that may exist in the source Excel file 
     # 1. Fill any NaNs in the source column. ffill() + bfill() handles NaNs anywhere.
     futureDf['massBalance'].ffill(inplace=True)
     futureDf['massBalance'].bfill(inplace=True)
 
-    # 2. Create the lagged feature, which introduces a single NaN in the first row.
+    # Create the lagged feature, which introduces a single NaN in the first row.
     futureDf = create_lagged_features(futureDf)
     
-    # 3. Fill the NaN created by the lag using the last clean historical value.
+    # Fill the NaN created by the lag using the last clean historical value.
     last_historical_mass_balance = X_dev['massBalance'].iloc[-1]
     futureDf['massBalance_lag1'].fillna(value=last_historical_mass_balance, inplace=True)
 
