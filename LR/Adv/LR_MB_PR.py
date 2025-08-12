@@ -124,6 +124,9 @@ if not X_hold_out.empty:
     hold_out_rmse = np.sqrt(mean_squared_error(y_hold_out, y_pred_hold_out))
     print("Performance on UNSEEN Hold-Out Data:")
     print(f"  Hold-Out R²: {hold_out_r2:.4f}")
+    if hold_out_r2 >= 0:
+        hold_out_r = np.sqrt(hold_out_r2)
+        print(f"  Hold-Out R value: {hold_out_r:.4f}")
     print(f"  Hold-Out MAE: {hold_out_mae:.2f}")
     print(f"  Hold-Out RMSE: {hold_out_rmse:.2f}")
 else:
@@ -180,4 +183,5 @@ try:
     plt.show()
 
 except FileNotFoundError:
+
     print("\nFuture forecast file not found. Skipping forecast.")
