@@ -28,7 +28,7 @@ print("---- STEP 1: Loading and Splitting Data for Small Dataset ----")
 
 # Load Historical Data
 try:
-    full_df = pd.read_excel("INSERT LOCATION OF HISTORICAL DATA FILE")
+    full_df = pd.read_excel("C:/Users/samam/OneDrive/MSC Diss/hacking/MSCCode/HistoricalData/historicalDataGlomfjordAnnual.xlsx")
     if len(full_df) >= 15:
         print(f"Warning: Dataset has {len(full_df)} years. This script is optimized for < 15 years.")
     
@@ -149,14 +149,14 @@ STEP 5: FORECASTING
 print("---- STEP 5: Forecasting ----")
 
 try:
-    futureGlacierDf = pd.read_excel("INSERT FUTURE GLACIER FORECAST")
+    futureGlacierDf = pd.read_excel("C:/Users/samam/OneDrive/MSC Diss/hacking/MSCCode/FutureMassBalance/massBalanceForecastAnnual.xlsx")
     
     # Proactively handle potential NaNs in the source forecast file
     futureGlacierDf['massBalance'].ffill(inplace=True)
     futureGlacierDf['massBalance'].bfill(inplace=True)
     
     # Import precipitation and merge dataframes
-    futurePrecipDf = pd.read_excel("INSERT FUTURE PRECIPITATION SCENARIO")
+    futurePrecipDf = pd.read_excel("C:/Users/samam/OneDrive/MSC Diss/hacking/MSCCode/CMIP/SSP5Annual.xlsx")
     futureDf = pd.merge(futureGlacierDf, futurePrecipDf[['year', 'precipitation']], on='year')
     
     # Fill potential NaNs
@@ -182,6 +182,16 @@ try:
     plt.legend()
     plt.show()
 
-except FileNotFoundError:
+    output_columns = ['year', 'predictedEnergy']
+    output_df = futureDf[output_columns]
+    
+    # Define the output file path with a filename and .xlsx extension
+    output_filepath = "HydropowerForecastResults.xlsx"
+    
+    # Export the DataFrame to an Excel file
+    output_df.to_excel(output_filepath, index=False)
+    
+    print(f"\nForecast results successfully exported to: {output_filepath}")
 
+except FileNotFoundError:
     print("\nFuture forecast file not found. Skipping forecast.")
