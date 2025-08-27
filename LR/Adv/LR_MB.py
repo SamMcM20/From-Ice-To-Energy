@@ -157,5 +157,17 @@ try:
     plt.legend()
     plt.show()
 
+    output_columns = ['year', 'predictedEnergy']
+    output_df = futureDf[output_columns]
+    
+    # Define the output file path with a filename and .xlsx extension
+    output_filepath = "HydropowerForecastResults.xlsx"
+    
+    # Export the DataFrame to an Excel file
+    output_df.to_excel(output_filepath, index=False)
+    
+    print(f"\nForecast results successfully exported to: {output_filepath}")
+
 except FileNotFoundError:
+
     print("\nFuture forecast file not found. Skipping forecast.")
